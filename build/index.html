@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Dungeon</title>
+    <meta charset="UTF-8">
+    <meta name="description" content="Dungeon Master AJAX Game" />
+    <meta name="keywords" content="dungeon, ajax, javascript, css" />
+    <meta name="author" content="Daniel Amo" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/main.min.css" type="text/css" media="all" />
+  </head>
+  <body>
+    <header>
+      <div class="row">
+        <div class="col-md-4">
+          <h1 class="logo"><img src="media/images/logo.png" width="400" alt="LaSalle Dungeon"/></h1>
+        </div>
+        <div class="col-md-8">
+          <nav>
+            <ul>
+              <li hidden id="volumeOn"><a onclick="volume('on')"><i class="fa fa-volume-up" aria-hidden="true"></i></a></li>
+              <li id="volumeOff"><a onclick="volume('off')"><i class="fa fa-volume-off" aria-hidden="true"></i></a></li>
+              <li id="menu-jugador" hidden><a onclick="modalCambiarInfo()" class="user-info"><img class="avatar" src="media/images/user.png" width="50" alt="avatar"/><span class="player-name"></span></a></li>
+              <li id="menu-cargarPartida"><a onclick="modalCargarPartida()">Cargar partida</a></li>
+              <li id="menu-nuevaPartida"><a onclick="modalNuevaPartida()">Nueva partida</a></li>
+              <li id="menu-salir" hidden><a onclick="salirSinGuardar()">Salir sin guardar</a></li>
+              <li id="menu-guardarPartida" hidden><a onclick="modalGuardarPartida()">Guardar partida</a></li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+    </header>
+    <section id="informacion">
+      <ul>
+        <li class="col-md-3"><label>Xp </label><div class="progress">
+              <div id="progress-bar-xp" class="progress-bar xp" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="10">
+              </div>
+          </div> <label id="label-xp"></label></li>
+        <li class="col-md-3"><label>Ataque </label><div class="progress">
+              <div id="progress-bar-ataque" class="progress-bar ataque" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="200">
+              </div>
+        </div> <label id="label-ataque"></label></li>
+        <li class="col-md-3"><label>Defensa </label><div class="progress">
+              <div id="progress-bar-defensa" class="progress-bar defensa" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="200">
+              </div>
+        </div> <label id="label-defensa"></label></li>
+        <li class="col-md-3"><label>Vida </label><div class="progress">
+              <div id="progress-bar-vida" class="progress-bar vida" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="10">
+              </div>
+        </div> <label id="label-vida"></label></li>
+      </ul>
+    </section>
+    <div id="player-board" class="row">
+      <div class="col-md-3 left-part">
+        <section class="box" id="mapa">
+          <div class="box-header">
+            <h2>Mapa</h2>
+            <label id="nivel-actual">Nivel 0</label>
+          </div>
+          <div class="box-body">
+            <table>
+              <tbody>
+                <tr>
+                  <td><img style="background-image:url(media/images/mapa_blanco.png)" src = "media/images/mapa_null.png" id="0" alt="mapa"/></td>
+                  <td><img style="background-image:url(media/images/mapa_blanco.png)" src = "media/images/mapa_null.png" id="1" alt="mapa"/></td>
+                  <td><img style="background-image:url(media/images/mapa_blanco.png)" src = "media/images/mapa_null.png" id="2" alt="mapa"/></td>
+                  <td><img style="background-image:url(media/images/mapa_blanco.png)" src = "media/images/mapa_null.png" id="3" alt="mapa"/></td>
+                  <td><img style="background-image:url(media/images/mapa_blanco.png)" src = "media/images/mapa_null.png" id="4" alt="mapa"/></td>
+                  <td><img style="background-image:url(media/images/mapa_blanco.png)" src = "media/images/mapa_null.png" id="5" alt="mapa"/></td>
+                  <td><img style="background-image:url(media/images/mapa_blanco.png)" src = "media/images/mapa_null.png" id="6" alt="mapa"/></td>
+                  <td><img style="background-image:url(media/images/mapa_blanco.png)" src = "media/images/mapa_null.png" id="7" alt="mapa"/></td>
+                  <td><img style="background-image:url(media/images/mapa_blanco.png)" src = "media/images/mapa_null.png" id="8" alt="mapa"/></td>
+                  <td><img style="background-image:url(media/images/mapa_blanco.png)" src = "media/images/mapa_null.png" id="9" alt="mapa"/></td>
+                </tr>
+                <tr>
+                  <td><img style="background-image:url(media/images/mapa_blanco.png)" src = "media/images/mapa_null.png" id="10" alt="mapa"/></td>
+                  <td><img style="background-image:url(media/images/mapa_blanco.png)" src = "media/images/mapa_null.png" id="11" alt="mapa"/></td>
+                  <td><img style="background-image:url(media/images/mapa_blanco.png)" src = "media/images/mapa_null.png" id="12" alt="mapa"/></td>
+                  <td><img style="background-image:url(media/images/mapa_blanco.png)" src = "media/images/mapa_null.png" id="13" alt="mapa"/></td>
+                  <td><img style="background-image:url(media/images/mapa_blanco.png)" src = "media/images/mapa_null.png" id="14" alt="mapa"/></td>
+                  <td><img style="background-image:url(media/images/mapa_blanco.png)" src = "media/images/mapa_null.png" id="15" alt="mapa"/></td>
+                  <td><img style="background-image:url(media/images/mapa_blanco.png)" src = "media/images/mapa_null.png" id="16" alt="mapa"/></td>
+                  <td><img style="background-image:url(media/images/mapa_blanco.png)" src = "media/images/mapa_null.png" id="17" alt="mapa"/></td>
+                  <td><img style="background-image:url(media/images/mapa_blanco.png)" src = "media/images/mapa_null.png" id="18" alt="mapa"/></td>
+                  <td><img style="background-image:url(media/images/mapa_blanco.png)" src = "media/images/mapa_null.png" id="19" alt="mapa"/></td>
+                </tr>
+                <tr>
+                  <td><img style="background-image:url(media/images/mapa_blanco.png)" src = "media/images/mapa_null.png" id="20" alt="mapa"/></td>
+                  <td><img style="background-image:url(media/images/mapa_blanco.png)" src = "media/images/mapa_null.png" id="21" alt="mapa"/></td>
+                  <td><img style="background-image:url(media/images/mapa_blanco.png)" src = "media/images/mapa_null.png" id="22" alt="mapa"/></td>
+                  <td><img style="background-image:url(media/images/mapa_blanco.png)" src = "media/images/mapa_null.png" id="23" alt="mapa"/></td>
+                  <td><img style="background-image:url(media/images/mapa_blanco.png)" src = "media/images/mapa_null.png" id="24" alt="mapa"/></td>
+                  <td><img style="background-image:url(media/images/mapa_blanco.png)" src = "media/images/mapa_null.png" id="25" alt="mapa"/></td>
+                  <td><img style="background-image:url(media/images/mapa_blanco.png)" src = "media/images/mapa_null.png" id="26" alt="mapa"/></td>
+                  <td><img style="background-image:url(media/images/mapa_blanco.png)" src = "media/images/mapa_null.png" id="27" alt="mapa"/></td>
+                  <td><img style="background-image:url(media/images/mapa_blanco.png)" src = "media/images/mapa_null.png" id="28" alt="mapa"/></td>
+                  <td><img style="background-image:url(media/images/mapa_blanco.png)" src = "media/images/mapa_null.png" id="29" alt="mapa"/></td>
+                </tr>
+                <tr>
+                  <td><img style="background-image:url(media/images/mapa_blanco.png)" src = "media/images/mapa_null.png" id="30" alt="mapa"/></td>
+                  <td><img style="background-image:url(media/images/mapa_blanco.png)" src = "media/images/mapa_null.png" id="31" alt="mapa"/></td>
+                  <td><img style="background-image:url(media/images/mapa_blanco.png)" src = "media/images/mapa_null.png" id="32" alt="mapa"/></td>
+                  <td><img style="background-image:url(media/images/mapa_blanco.png)" src = "media/images/mapa_null.png" id="33" alt="mapa"/></td>
+                  <td><img style="background-image:url(media/images/mapa_blanco.png)" src = "media/images/mapa_null.png" id="34" alt="mapa"/></td>
+                  <td><img style="background-image:url(media/images/mapa_blanco.png)" src = "media/images/mapa_null.png" id="35" alt="mapa"/></td>
+                  <td><img style="background-image:url(media/images/mapa_blanco.png)" src = "media/images/mapa_null.png" id="36" alt="mapa"/></td>
+                  <td><img style="background-image:url(media/images/mapa_blanco.png)" src = "media/images/mapa_null.png" id="37" alt="mapa"/></td>
+                  <td><img style="background-image:url(media/images/mapa_blanco.png)" src = "media/images/mapa_null.png" id="38" alt="mapa"/></td>
+                  <td><img style="background-image:url(media/images/mapa_blanco.png)" src = "media/images/mapa_null.png" id="39" alt="mapa"/></td>
+                </tr>
+                <tr>
+                  <td><img style="background-image:url(media/images/mapa_blanco.png)" src = "media/images/mapa_null.png" id="40" alt="mapa"/></td>
+                  <td><img style="background-image:url(media/images/mapa_blanco.png)" src = "media/images/mapa_null.png" id="41" alt="mapa"/></td>
+                  <td><img style="background-image:url(media/images/mapa_blanco.png)" src = "media/images/mapa_null.png" id="42" alt="mapa"/></td>
+                  <td><img style="background-image:url(media/images/mapa_blanco.png)" src = "media/images/mapa_null.png" id="43" alt="mapa"/></td>
+                  <td><img style="background-image:url(media/images/mapa_blanco.png)" src = "media/images/mapa_null.png" id="44" alt="mapa"/></td>
+                  <td><img style="background-image:url(media/images/mapa_blanco.png)" src = "media/images/mapa_null.png" id="45" alt="mapa"/></td>
+                  <td><img style="background-image:url(media/images/mapa_blanco.png)" src = "media/images/mapa_null.png" id="46" alt="mapa"/></td>
+                  <td><img style="background-image:url(media/images/mapa_blanco.png)" src = "media/images/mapa_null.png" id="47" alt="mapa"/></td>
+                  <td><img style="background-image:url(media/images/mapa_blanco.png)" src = "media/images/mapa_null.png" id="48" alt="mapa"/></td>
+                  <td><img style="background-image:url(media/images/mapa_blanco.png)" src = "media/images/mapa_null.png" id="49" alt="mapa"/></td>
+                </tr>
+                <tr>
+                  <td><img style="background-image:url(media/images/mapa_blanco.png)" src = "media/images/mapa_null.png" id="50" alt="mapa"/></td>
+                  <td><img style="background-image:url(media/images/mapa_blanco.png)" src = "media/images/mapa_null.png" id="51" alt="mapa"/></td>
+                  <td><img style="background-image:url(media/images/mapa_blanco.png)" src = "media/images/mapa_null.png" id="52" alt="mapa"/></td>
+                  <td><img style="background-image:url(media/images/mapa_blanco.png)" src = "media/images/mapa_null.png" id="53" alt="mapa"/></td>
+                  <td><img style="background-image:url(media/images/mapa_blanco.png)" src = "media/images/mapa_null.png" id="54" alt="mapa"/></td>
+                  <td><img style="background-image:url(media/images/mapa_blanco.png)" src = "media/images/mapa_null.png" id="55" alt="mapa"/></td>
+                  <td><img style="background-image:url(media/images/mapa_blanco.png)" src = "media/images/mapa_null.png" id="56" alt="mapa"/></td>
+                  <td><img style="background-image:url(media/images/mapa_blanco.png)" src = "media/images/mapa_null.png" id="57" alt="mapa"/></td>
+                  <td><img style="background-image:url(media/images/mapa_blanco.png)" src = "media/images/mapa_null.png" id="58" alt="mapa"/></td>
+                  <td><img style="background-image:url(media/images/mapa_blanco.png)" src = "media/images/mapa_null.png" id="59" alt="mapa"/></td>
+                </tr>
+                <tr>
+                  <td><img style="background-image:url(media/images/mapa_blanco.png)" src = "media/images/mapa_null.png" id="60" alt="mapa"/></td>
+                  <td><img style="background-image:url(media/images/mapa_blanco.png)" src = "media/images/mapa_null.png" id="61" alt="mapa"/></td>
+                  <td><img style="background-image:url(media/images/mapa_blanco.png)" src = "media/images/mapa_null.png" id="62" alt="mapa"/></td>
+                  <td><img style="background-image:url(media/images/mapa_blanco.png)" src = "media/images/mapa_null.png" id="63" alt="mapa"/></td>
+                  <td><img style="background-image:url(media/images/mapa_blanco.png)" src = "media/images/mapa_null.png" id="64" alt="mapa"/></td>
+                  <td><img style="background-image:url(media/images/mapa_blanco.png)" src = "media/images/mapa_null.png" id="65" alt="mapa"/></td>
+                  <td><img style="background-image:url(media/images/mapa_blanco.png)" src = "media/images/mapa_null.png" id="66" alt="mapa"/></td>
+                  <td><img style="background-image:url(media/images/mapa_blanco.png)" src = "media/images/mapa_null.png" id="67" alt="mapa"/></td>
+                  <td><img style="background-image:url(media/images/mapa_blanco.png)" src = "media/images/mapa_null.png" id="68" alt="mapa"/></td>
+                  <td><img style="background-image:url(media/images/mapa_blanco.png)" src = "media/images/mapa_null.png" id="69" alt="mapa"/></td>
+                </tr>
+                <tr>
+                  <td><img style="background-image:url(media/images/mapa_blanco.png)" src = "media/images/mapa_null.png" id="70" alt="mapa"/></td>
+                  <td><img style="background-image:url(media/images/mapa_blanco.png)" src = "media/images/mapa_null.png" id="71" alt="mapa"/></td>
+                  <td><img style="background-image:url(media/images/mapa_blanco.png)" src = "media/images/mapa_null.png" id="72" alt="mapa"/></td>
+                  <td><img style="background-image:url(media/images/mapa_blanco.png)" src = "media/images/mapa_null.png" id="73" alt="mapa"/></td>
+                  <td><img style="background-image:url(media/images/mapa_blanco.png)" src = "media/images/mapa_null.png" id="74" alt="mapa"/></td>
+                  <td><img style="background-image:url(media/images/mapa_blanco.png)" src = "media/images/mapa_null.png" id="75" alt="mapa"/></td>
+                  <td><img style="background-image:url(media/images/mapa_blanco.png)" src = "media/images/mapa_null.png" id="76" alt="mapa"/></td>
+                  <td><img style="background-image:url(media/images/mapa_blanco.png)" src = "media/images/mapa_null.png" id="77" alt="mapa"/></td>
+                  <td><img style="background-image:url(media/images/mapa_blanco.png)" src = "media/images/mapa_null.png" id="78" alt="mapa"/></td>
+                  <td><img style="background-image:url(media/images/mapa_blanco.png)" src = "media/images/mapa_null.png" id="79" alt="mapa"/></td>
+                </tr>
+                <tr>
+                  <td><img style="background-image:url(media/images/mapa_blanco.png)" src = "media/images/mapa_null.png" id="80" alt="mapa"/></td>
+                  <td><img style="background-image:url(media/images/mapa_blanco.png)" src = "media/images/mapa_null.png" id="81" alt="mapa"/></td>
+                  <td><img style="background-image:url(media/images/mapa_blanco.png)" src = "media/images/mapa_null.png" id="82" alt="mapa"/></td>
+                  <td><img style="background-image:url(media/images/mapa_blanco.png)" src = "media/images/mapa_null.png" id="83" alt="mapa"/></td>
+                  <td><img style="background-image:url(media/images/mapa_blanco.png)" src = "media/images/mapa_null.png" id="84" alt="mapa"/></td>
+                  <td><img style="background-image:url(media/images/mapa_blanco.png)" src = "media/images/mapa_null.png" id="85" alt="mapa"/></td>
+                  <td><img style="background-image:url(media/images/mapa_blanco.png)" src = "media/images/mapa_null.png" id="86" alt="mapa"/></td>
+                  <td><img style="background-image:url(media/images/mapa_blanco.png)" src = "media/images/mapa_null.png" id="87" alt="mapa"/></td>
+                  <td><img style="background-image:url(media/images/mapa_blanco.png)" src = "media/images/mapa_null.png" id="88" alt="mapa"/></td>
+                  <td><img style="background-image:url(media/images/mapa_blanco.png)" src = "media/images/mapa_null.png" id="89" alt="mapa"/></td>
+                </tr>
+                <tr>
+                  <td><img style="background-image:url(media/images/mapa_blanco.png)" src = "media/images/mapa_null.png" id="90" alt="mapa"/></td>
+                  <td><img style="background-image:url(media/images/mapa_blanco.png)" src = "media/images/mapa_null.png" id="91" alt="mapa"/></td>
+                  <td><img style="background-image:url(media/images/mapa_blanco.png)" src = "media/images/mapa_null.png" id="92" alt="mapa"/></td>
+                  <td><img style="background-image:url(media/images/mapa_blanco.png)" src = "media/images/mapa_null.png" id="93" alt="mapa"/></td>
+                  <td><img style="background-image:url(media/images/mapa_blanco.png)" src = "media/images/mapa_null.png" id="94" alt="mapa"/></td>
+                  <td><img style="background-image:url(media/images/mapa_blanco.png)" src = "media/images/mapa_null.png" id="95" alt="mapa"/></td>
+                  <td><img style="background-image:url(media/images/mapa_blanco.png)" src = "media/images/mapa_null.png" id="96" alt="mapa"/></td>
+                  <td><img style="background-image:url(media/images/mapa_blanco.png)" src = "media/images/mapa_null.png" id="97" alt="mapa"/></td>
+                  <td><img style="background-image:url(media/images/mapa_blanco.png)" src = "media/images/mapa_null.png" id="98" alt="mapa"/></td>
+                  <td><img style="background-image:url(media/images/mapa_blanco.png)" src = "media/images/mapa_null.png" id="99" alt="mapa"/></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+        <section id="equipo" class="box">
+          <div class="box-header">
+            <h2>Equipo</h2>
+          </div>
+          <div class="box-body">
+            <div class="row">
+              <div class="col-md-6">
+                <label>Mano izquierda</label>
+                <div id="mano-izq" class="dropzone"></div>
+                <div id="info-mano-izq">
+                  <label id="nombre-mano-izq">Arma</label>
+                  <p>Ataque: <span id="ataque-mano-izq">0</span></p>
+                  <p >Defensa: <span id="defensa-mano-izq">0</span></p>
+                  <p>Durabilidad: <span id="durabilidad-mano-izq">0</span></p>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <label>Mano derecha</label>
+                <div id="mano-der" class="dropzone"></div>
+                <div id="info-mano-der">
+                  <label id="nombre-mano-der">Arma</label>
+                  <p>Ataque: <span id="ataque-mano-der">0</span></p>
+                  <p>Defensa: <span id="defensa-mano-der">0</span></p>
+                  <p>Durabilidad: <span id="durabilidad-mano-der">0</span></p>
+                </div>
+              </div>
+            </div>
+            <label class="title"><b>Mochila</b></label>
+            <div class="mochila" id="mochila">
+              <i class="vacia">Mochila vacía</i>
+            </div>
+          </div>
+        </section>
+      </div>
+      <div class="col-md-6 center-part">
+        <section id="navegacion">
+          <canvas id="visor" width="512" height="420"></canvas>
+        </section>
+        <section id="consola" class="box">
+          <div class="box-header">
+            <h2>Consola</h2>
+          </div>
+          <div class="box-body">
+            <label id="first-console-text" class="first-line"></label>
+            <label id="console-text" class="second-line"></label>
+          </div>
+        </section>
+      </div>
+      <div class="col-md-3 right-part">
+        <section class="box" id="controles">
+          <div class="box-header">
+            <h2>Controles</h2>
+          </div>
+          <div class="box-body">
+            <div>
+              <a onclick="mover('up')" id="movendavant"><img src="media/images/up.png" width="75" alt="arriba"/></a>
+            </div>
+            <div>
+              <a onclick="mover('left')" id="movesquerra"><img src="media/images/left.png" width="75" alt="izquierda"/></a>
+              <a onclick="mover('down')" id="movdreta"><img src="media/images/down.png" width="75" alt="abajo"/></a>
+              <a onclick="mover('right')" id="movendarrere"><img src="media/images/right.png" width="75" alt="derecha"/></a>
+            </div>
+            <div class="barra">
+              <a onclick="saltar()" id="saltar"><img src="media/images/barra.png" width="225" alt="saltar"/></a>
+            </div>
+          </div>
+        </section>
+        <section class="box" id="lucha">
+          <div class="box-header">
+            <h2>Lucha</h2>
+          </div>
+          <div class="box-body">
+            <p id="mensaje-lucha">¡Tienes un enemigo delante! Intenta que tu ataque supere su defensa y que tu defensa supere su ataque.</p>
+            <div style="text-align: center">
+              <button id="empezarLuchaButton" type="button" class="btn btn-salle">¡Empezar lucha!</button>
+              <button hidden onclick="huir()" id="huirButton" type="button" class="btn btn-salle">Huir (usar justificante)</button>
+              <div id="info-enemigo">
+                <label id="nombre-enemigo"></label>
+                <div id="vida-enemigo">
+                  <label>Vida </label>
+                  <div class="progress contenedor-pb-vida-enemigo">
+                    <div id="progress-bar-vida-enemigo" class="progress-bar vida" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="10">
+                    </div>
+                  </div>
+                  <label id="label-vida-enemigo"><span id="vida-actual-enemigo"></span>/<span id="vida-maxima-enemigo"></span></label>
+                </div>
+                <p>Ataque: <span id="ataque-enemigo">0</span></p>
+                <p>Defensa: <span id="defensa-enemigo">0</span></p>
+                <p>Xp: <span id="xp-enemigo">0</span></p>
+                <p class="objetos-enemigo"><b>Objetos</b></p>
+                <p id="objetos-enemigo">
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+
+    </div>
+    <footer>
+      <p>LaSalleDungeon  &copy; 2017-2018 - Proyectos Web 1 (Creado por Cristian Gonzàlez, Marc Castells y Pau Nonell)</p>
+    </footer>
+
+    <!-- Modal para nueva partida (seleccionar nombre de la partida y avatar) -->
+    <div class="modal fade" id="newGameModal" tabindex="-1" role="dialog" aria-labelledby="newGameModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="newGameModalLabel">NUEVA PARTIDA</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="newGameModalClose">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <p id="newGameModal-info">Para iniciar una nueva partida, escribe el nombre de la partida y selecciona un avatar:</p>
+            <form id="newGameForm">
+              <div class="form-group">
+                <label for="name"><b>Nombre partida</b> (máximo 30 car.)</label>
+                <input type="text" name="name" required class="form-control" id="name" maxlength="30">
+              </div>
+              <div class="form-group">
+                <label for="avatarId"><b>Avatar</b></label>
+                <input hidden type="number" class="form-control" name="avatarId" id="avatarId">
+              </div>
+              <div class="row avatares">
+                <div class="col-md-3">
+                  <img id="avatar_1" onclick="selectAvatar(1)" src="media/images/avatar1.png" width="80" alt="avatar1"/>
+                </div>
+                <div class="col-md-3">
+                  <img id="avatar_2" onclick="selectAvatar(2)" src="media/images/avatar2.png" width="80" alt="avatar2"/>
+                </div>
+                <div class="col-md-3">
+                  <img id="avatar_3" onclick="selectAvatar(3)" src="media/images/avatar3.png" width="80" alt="avatar3"/>
+                </div>
+                <div class="col-md-3">
+                  <img id="avatar_4" onclick="selectAvatar(4)" src="media/images/avatar4.png" width="80" alt="avatar4"/>
+                </div>
+              </div>
+            </form>
+            <p id="newGameModal-info-downloading">Descargando la configuración de partida nueva...</p>
+          </div>
+          <div class="modal-footer">
+            <button onclick="iniciarPartida()" id="iniciarPartidaButton" type="button" class="btn btn-salle">Iniciar partida</button>
+            <button hidden onclick="cambiarInfoJugador()" id="cambiarInfoButton" type="button" class="btn btn-salle">Guardar cambios</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal para cargar partida -->
+    <div class="modal fade" id="loadGameModal" tabindex="-1" role="dialog" aria-labelledby="loadGameModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="loadGameModalLabel">CARGAR PARTIDA</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="loadGameModalClose">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <p id="loadGameModal-info">Elige un slot para cargar la partida.</p>
+            <form id="loadGameForm">
+              <div class="form-group">
+                <button id="slot1-load" type="button" class="btn btn-secondary btn-slot disabled">Slot 1: cargando información...</button>
+              </div>
+              <div class="form-group">
+                <button id="slot2-load" type="button" class="btn btn-secondary btn-slot disabled">Slot 2: cargando información...</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal para guardar partida -->
+    <div class="modal fade" id="saveGameModal" tabindex="-1" role="dialog" aria-labelledby="saveGameModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="saveGameModalLabel">GUARDAR PARTIDA</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="saveGameModalClose">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <p id="saveGameModal-info">Elige un slot vacío para guardar la partida o un slot lleno para vaciarlo.</p>
+            <form id="saveGameForm">
+              <div class="form-group">
+                <button id="slot1-save" type="button" class="btn btn-secondary btn-slot disabled">Slot 1: cargando información...</button>
+              </div>
+              <div class="form-group">
+                <button id="slot2-save" type="button" class="btn btn-secondary btn-slot disabled">Slot 2: cargando información...</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal para elegir protección -->
+    <div class="modal fade" id="chooseProtectionModal" tabindex="-1" role="dialog" aria-labelledby="chooseProtectionModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="chooseProtectionModalLabel">ELEGIR PROTECCIÓN</h5>
+          </div>
+          <div class="modal-body">
+            <p>Elige qué quieres proteger. ¡Si aciertas, esquivarás el golpe!</p>
+            <div id="protection-selector" class="protection-selector-torso">
+              <div id="area-cabeza"></div>
+              <div id="area-torso"></div>
+              <div id="area-piernas"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <audio id="audio" src="media/audio/starwars.mp3" loop></audio>
+
+    <script src="js/vendor.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
+
+    <script src="js/juego.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/modals.js"></script>
+    <script src="js/ajax.js"></script>
+    <script src="js/graphics.js"></script>
+    <script src="js/move.js"></script>
+    <script src="js/utils.js"></script>
+    <script src="js/objetos.js"></script>
+    <script src="js/enemigos.js"></script>
+
+    <script>
+    </script>
+
+
+  </body>
+</html>

@@ -1,0 +1,102 @@
+-----------------
+Movimiento
+- Además añade nuevos.
+-----------------
+Salto y arrastrarse
+
+-----------------
+Objetos físicos
+- Además añade nuevas características a los objetos.
+-----------------
+Durabilitat y ...
+
+-----------------
+Lucha
+- Además añade nuevas funcionalidades como huir, esquivar...
+-----------------
+Esquivar: lo de la esgrima
+Huir: te encuentras justificantes medicos por las casillas y los puedes guardar para usarlos cuando los necesites
+
+-----------------
+Nivel / XP
+- Además añade nuevas funcionalidades.
+-----------------
+No puedes coger una arma hasta que no tienes suficiente XP
+
+-----------------
+ Jugabilidad
+- Además, añade distintos objetos y enemigos, con características diferentes los unos a los otros.
+-----------------
+Tipos de enemigos:
+- Robot LSMaker (son merda)
+- Profesors
+- Final boss (Xavi Senmartí) (al guanyar al final boss (xavi), guanyes la matricula com a objecte i pots sortir)
+Tipos de objectos:
+- Software (scripts y chuletas)
+- Hardware (portatils, ..., oscil·loscopi, que es el mes fort)
+
+-----------------
+Información de datos del jugador y estado de la partida.
+- Además muestra información adicional a la básica (porcentajes, número de enemigos muertos...)
+-----------------
+Consola que muestre con texto todo lo que pasa en todo momento. Sale en consola, por ejemplo:
+- Porcentajes? de vida, o de experiencia, o de durabilitat
+- Números de enemigos muertos ACUMULADOS
+
+-----------------
+ Diseño
+ - Además añade animaciones y efectos (visuales y/o sonoros).
+-----------------
+- Transició entre frames per tal de que sembli 3d
+- Efectos sonoros
+
+-----------------
+Nivel mazmorra
+- Además cambia de nivel a niveles más allá del contiguo.
+-----------------
+Teletransportador de -3 a -1 o -1 a -3 (has copiado en un examen)
+
+
+TECNOLOGIA
+
+-----------------
+API
+- Envía y recibe y hace tratamiento de los códigos devueltos.
+-----------------
+Es gestionar tots els codis d'error
+
+-----------------
+JSON
+- Hace uso de los datos tratados.
+-----------------
+??????????
+
+-----------------
+SASS
+- El código SCSS contiene lógica de programación (condicionales, mixins, variables...)
+-----------------
+OK.
+
+-----------------
+ JavaScript
+- Utiliza una librería JavaScript
+-----------------
+OK. jQuery és suficient.
+
+-----------------
+HTML5
+- Valida W3 sin errores, aunque se aceptan warnings o infos.
+-----------------
+
+-----------------
+Gulp
+- Existe el archivo de configuración gulp y las tareas están bien configuradas.
+-----------------
+
+-----------------
+Carpetas Src & Build
+- Entrega las dos carpetas necesarias y contienen los archivos correctos.
+-----------------
+
+
+...

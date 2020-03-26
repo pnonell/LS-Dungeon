@@ -1,0 +1,28 @@
+Performing scene check  for invalid nodes, materials, maps etc. on the : 
+03/01/2018 - 19:48:18
+Invalid material :"pants" found on node : "Group1".
+Invalid material :"shirt" found on node : "shirt".
+Invalid material :"Material #32" found on node : "hand".
+Invalid material :"Material #32" found on node : "leg1".
+Invalid material :"Material #32" found on node : "leg2".
+Invalid material :"shoe" found on node : "Group2".
+Invalid material :"shoe" found on node : "Group003".
+Invalid material :"Material #33" found on node : "head".
+Invalid map : "(null)" found on node : "head".
+Invalid material :"Material #32" found on node : "hand".
+Invalid material :"14 - Default" found on node : "Group4".
+Invalid material :"eye" found on node : "eye002".
+Invalid material :"eye" found on node : "eye001".
+Scene contains : 13 invalid features.
+Suceeded in converting Arch & Design : "Unknown" into Physical Material :"Unknown name".
+Suceeded in converting Arch & Design : "Unknown" into Physical Material :"Unknown name".
+Object of type "Subsurface Scattering Fast Skin" (missing class) removed.
+Suceeded in converting Arch & Design : "Unknown" into Physical Material :"Unknown name".
+Object of type "Subsurface Scattering Fast Skin" (missing class) removed.
+Object of type "Bump" (missing class) removed.
+Suceeded in converting Arch & Design : "Unknown" into Physical Material :"Unknown name".
+Suceeded in converting Arch & Design : "Unknown" into Physical Material :"Unknown name".
+Suceeded in converting mr Photographic Exposure Control : "Unknown" into Physical Camera Exposure Control :"Unknown name".
+Performing scene check  for invalid nodes, materials, maps etc. on the : 
+03/01/2018 - 19:48:31
+Scene contains : 0 invalid features.

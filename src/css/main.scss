@@ -1,0 +1,439 @@
+$web-color: #6aade4;
+
+@mixin part($part, $margin){
+  @if $part == left {
+    margin: $margin 0 $margin $margin;
+  }
+  @if $part == right {
+    margin: $margin $margin $margin 0;
+  }
+  @if $part == center {
+    margin: $margin 0;
+  }
+}
+
+#navegacion {
+  text-align: center!important;
+  height: min-content;
+  canvas{
+    height: min-content;
+  }
+}
+
+#equipcarac {
+  float:left;
+}
+
+header{
+  background-color: $web-color;
+  padding-right: 20px;
+  padding-left: 20px;
+  min-width: 1150px;
+  .logo{
+    float: left;
+    margin: 10px 0;
+  }
+  nav{
+    margin: 16px 0 17px;
+  }
+  ul{
+    list-style: none;
+    display: block;
+    li{
+      cursor: pointer;
+      float: right;
+      a{
+        font-size: 18px;
+        color: #fff !important;
+        line-height: 24px;
+        padding: 15px 18px;
+        display: block;
+        .avatar{
+          display: inline-block;
+          height: 36px;
+          width: 36px;
+          vertical-align: middle;
+          margin-right: 6px;
+          margin-left: 6px;
+        }
+      }
+      a:hover{
+        background-color: #b5b5b5;
+      }
+      .user-info{
+            padding: 9px 18px 8px;
+      }
+    }
+  }
+}
+
+
+#informacion{
+  min-width: 1135px;
+  background-color: black;
+  height: auto;
+  text-align: right;
+  padding: 8px 0px;
+  ul{
+    margin-bottom: 0;
+    display: flex;
+    li{
+      color: #fff;
+      padding: 0 50px;
+      display: -webkit-inline-box;
+      .progress{
+        width: 60%;
+        margin: 5px;
+        .xp {
+          width: 100%;
+        }
+        .ataque{
+            background-color: red;
+            width: 100%;
+        }
+        .defensa{
+          background-color: green;
+          width: 100%;
+        }
+        .vida{
+          background-color: pink;
+          width: 100%;
+        }
+      }
+    }
+  }
+
+}
+
+.box{
+  border: 0.5px solid #c0ccdc;
+  height: min-content;
+  .box-body{
+    padding: 15px;
+
+  }
+  .box-header{
+    background-color: $web-color;
+    padding: 10px 10px 5px 20px;
+    h2{
+      color: #fff;
+      font-weight: normal;
+      font-size: 1.4em;
+      line-height: 32px;
+    }
+
+  }
+}
+
+.left-part section{
+  @include part(left, 20px);
+}
+
+.center-part section{
+  @include part(center, 20px);
+}
+
+.right-part section{
+  @include part(right, 20px);
+}
+
+#mapa{
+  .box-header {
+    overflow: hidden;
+    h2 {
+      float: left;
+    }
+    label {
+      float: right;
+      margin-top: 5px;
+      margin-right: 10px;
+      color: white;
+    }
+  }
+  .box-body{
+    display: block;
+    text-align: center;
+    background-color: black;
+  }
+}
+
+#consola{
+  .box-body{
+    background-color: black;
+    height: 200px;
+    overflow-y: scroll;
+    label{
+      font-size: 16px;
+    }
+    .first-line{
+      color: white;
+    }
+    .second-line{
+      color: #6b6b6b;
+    }
+  }
+}
+
+#controles{
+  .box-body{
+    text-align: center;
+  }
+  .barra{
+    margin-top: 10px;
+  }
+  a{
+    cursor: pointer;
+  }
+}
+
+#equipo{
+  .box-body .row{
+    text-align: center;
+    label{
+      font-weight: bold;
+      font-size: 15px;
+    }
+    #info-mano-izq, #info-mano-der{
+      label{
+        font-weight: normal;
+      }
+    }
+    p{
+      text-align: center;
+      margin-bottom: 0px;
+    }
+  }
+  .mochila{
+    display: table;
+    img{
+      width: 70px;
+    }
+  }
+}
+
+label.title{
+  margin-top: 20px;
+}
+
+i.vacia {
+  color: gray;
+}
+
+.modal-dialog{
+  margin: 150px auto;
+  .modal-header{
+    background-color: $web-color;
+    color: #fff;
+    .close{
+      margin: 0;
+      padding: 0;
+    }
+  }
+  .modal-title{
+    margin: 0 auto;
+  }
+  .modal-footer{
+    margin: 0 auto;
+    border: 0;
+  }
+}
+
+#newGameForm .avatares .col-md-3{
+  text-align: center;
+  .avatar_selected{
+    border: 4px solid black;
+  }
+}
+
+#newGameModal-info-downloading {
+  display: none;
+  text-align: center;
+  margin-top: 50px;
+}
+
+.btn-salle{
+  background-color: $web-color;
+  color: #fff;
+  cursor: pointer;
+}
+
+.btn-salle:hover{
+  background-color: #298fed;
+}
+
+.btn-salle:disabled:hover{
+  background-color: $web-color;
+  cursor: default;
+}
+
+.btn-slot {
+  width: 100%;
+}
+
+#player-board{
+  min-width: 1150px;
+  margin-left: 0;
+  margin-right: 0;
+}
+
+#mano-izq, #mano-der {
+  width: 75%;
+  height: 100px;
+  border-radius: 4px;
+  margin: 10px auto;
+  margin-bottom: 0;
+  padding: 10px;
+  background-size: cover;
+  background-position: center center;
+}
+
+.mano-hover {
+  background-image: url('../media/images/square_eliminar.jpg') !important;
+  cursor: pointer !important;
+}
+
+#info-mano-izq, #info-mano-der {
+  display: none;
+}
+
+#outer-dropzone {
+  height: 140px;
+}
+
+#inner-dropzone {
+  height: 80px;
+}
+
+.dropzone {
+  background-color: #ccc;
+  border: dashed 4px #aaa;
+  border-radius: 4px;
+  margin: 10px auto;
+  padding: 10px;
+  width: 80%;
+  transition: background-color 0.3s;
+}
+
+.drop-active {
+  border-color: black;
+  background-color: white;
+}
+
+.drop-target {
+  background-color: #ccffcc;
+  border-color: green;
+}
+
+.drag-drop {
+  display: inline-block;
+  -webkit-transform: translate(0px, 0px);
+          transform: translate(0px, 0px);
+  transition: background-color 0.3s;
+}
+
+.drag-drop.can-drop {
+  color: #000;
+  background-color: #4e4;
+}
+
+#lucha {
+  display: none;
+  #info-enemigo {
+    text-align: center;
+    label {
+      font-weight: bold;
+    }
+    p {
+      margin: 0;
+    }
+    #vida-enemigo {
+      display: -webkit-inline-box;
+      label {
+        margin-bottom: 0;
+      }
+      .progress-bar {
+        background: pink;
+      }
+    }
+    .contenedor-pb-vida-enemigo {
+      width: 150px;
+      margin-top: 5px;
+      margin-left: 5px;
+      margin-right: 5px;
+    }
+    .objetos-enemigo {
+      text-align: left;
+    }
+    #objetos-enemigo {
+      text-align: left;
+      img {
+        width: 70px;
+      }
+    }
+  }
+}
+
+#protection-selector {
+  width: 362px;
+  height: 500px;
+  margin-left: 50px;
+  background-image: url('../media/images/jugador_torso.png');
+}
+
+.protection-selector-cabeza {
+  background-image: url('../media/images/jugador_cabeza.png') !important;
+}
+
+.protection-selector-torso {
+  background-image: url('../media/images/jugador_torso.png') !important;
+}
+
+.protection-selector-piernas {
+  background-image: url('../media/images/jugador_piernas.png') !important;
+}
+
+#area-cabeza, #area-torso, #area-piernas {
+  width: 362px;
+  cursor: pointer;
+}
+
+#area-cabeza {
+  height: 180px;
+}
+#area-torso {
+  height: 120px;
+}
+#area-piernas {
+  height: 200px;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%
+}
+
+th, tr, td {
+    padding: 0;
+    border: 0;
+}
+
+td img {
+  width: 100%;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+}
+
+#huirButton{
+  margin-top: 10px;
+}
+
+footer{
+  background-color: $web-color;
+  font-size: 15px;
+  text-align: center;
+  p{
+    margin: 0px;
+    padding: 5px;
+    color: white;
+  }
+}

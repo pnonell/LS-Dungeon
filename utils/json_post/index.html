@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+  <title>UTF8</title>
+<script src="jquery-3.2.1.min.js"></script>
+<script src="json.js"></script>
+<script>
+function enviar() {
+  alert( $('#contenido').val() );
+  $.ajax({
+    dataType: 'text',
+    method: 'post',
+    encoding: 'UTF-8',
+    url: 'http://puigpedros.salleurl.edu/pwi/pac4/partida.php?token=844dc4d3-d096-4a5b-b6bf-b6515691cce6&slot=nueva',
+    data: {json: $('#contenido').val()},
+    success: function(response) {console.log(response)},
+    error: function( jqXHR, textStatus, errorThrown ) { alert( 'Error!!' + jqXHR + textStatus + errorThrown ); console.log(jqXHR);console.log(errorThrown); }
+  });
+}
+</script>
+</head>
+<body>
+  <textarea id="contenido">Hola</textarea>
+  <button onclick="enviar()">Guardar</button>
+</body>
+</html>
